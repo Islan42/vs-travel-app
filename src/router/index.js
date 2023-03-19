@@ -3,11 +3,14 @@ import HomeView from '../views/HomeView.vue'
 import sourceData from '@/data.json'
 
 const routes = [
-  {path: '/',name: 'home',component: HomeView},
+  {path: '/',name: 'home',component: HomeView, alias: '/home'},
   {
     path: '/protected', 
     name: 'protected', 
-    component: ()=> import('@/views/Protected.vue'), 
+    components: {
+      default: () => import('@/views/Protected.vue'),
+      LeftSideBar: () => import('@/components/LeftSideBar.vue')
+    }, 
     meta: {
       requiresAuth: true,
     }
@@ -21,7 +24,10 @@ const routes = [
   {
     path: '/invoices',
     name: 'invoices',
-    component: () => import('@/views/Invoices.vue'),
+    components: {
+      default: () => import('@/views/Invoices.vue'),
+      LeftSideBar: () => import('@/components/LeftSideBar.vue')
+    },
     meta: {
       requiresAuth: true,
     },
